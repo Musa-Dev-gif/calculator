@@ -1,1 +1,44 @@
-<!DOCTYPE html><html><head><title>Calc</title><style>body{display:flex;justify-content:center;align-items:center;height:100vh;background:#111}div{width:300px;background:#222;padding:20px;border-radius:10px}#d{color:#fff;font-size:40px;text-align:right;background:#333;padding:10px}button{padding:15px;margin:3px}</style></head><body><div><div id=d>0</div><button onclick=p(7)>7</button><button onclick=p(8)>8</button><button onclick=p(9)>9</button><button onclick=D()>DEL</button><button onclick=p(4)>4</button><button onclick=p(5)>5</button><button onclick=p(6)>6</button><button onclick=s('+')>+</button><button onclick=p(1)>1</button><button onclick=p(2)>2</button><button onclick=p(3)>3</button><button onclick=s('-')>-</button><button onclick=p(0)>0</button><button onclick=dot()>.</button><button onclick=e()>=</button><button onclick=s('*')>*</button><button onclick=C()>AC</button><button onclick=s('/')>/</button></div><script>let a='',o,b='',r;D=document.getElementById('d');function p(n){if(r)D.textContent='0',r=0;if(D.textContent=='0')D.textContent='';D.textContent+=n;if(!o)a=D.textContent;else b=D.textContent}function s(x){if(a&&b&&o){D.textContent=Q();a=D.textContent;b=''}else a=D.textContent;o=x;r=1}function Q(){let x=+a,y=+b;if(o=='+')return x+y;if(o=='-')return x-y;if(o=='*')return x*y;if(o=='/')return y==0?'Err':x/y}function e(){if(!a||!o||!b)return;D.textContent=Q();a=D.textContent;b='';o=null;r=1}function C(){D.textContent=0;a='';b='';o=null}function D(){D.textContent=D.textContent.slice(0,-1)||'0'}function dot(){if(!D.textContent.includes('.'))D.textContent+='.'}document.addEventListener('keydown',k=>{if(!isNaN(k.key))p(k.key);if('+-*/'.includes(k.key))s(k.key);if(k.key=='Enter')e();if(k.key=='Backspace')D();if(k.key=='Escape')C()})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MusaDev Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="calculator">
+<div class="display">
+<div class="previous" id="previous"></div>
+<div class="current" id="current">0</div>
+</div>
+<div class="buttons">
+<button class="btn clear" onclick="clearAll()">AC</button>
+<button class="btn clear" onclick="deleteLast()">⌫</button>
+<button class="btn operator" onclick="appendOperator('%')">%</button>
+<button class="btn operator" onclick="appendOperator('/')">÷</button>
+
+<button class="btn number" onclick="appendNumber('7')">7</button>
+<button class="btn number" onclick="appendNumber('8')">8</button>
+<button class="btn number" onclick="appendNumber('9')">9</button>
+<button class="btn operator" onclick="appendOperator('*')">×</button>
+
+<button class="btn number" onclick="appendNumber('4')">4</button>
+<button class="btn number" onclick="appendNumber('5')">5</button>
+<button class="btn number" onclick="appendNumber('6')">6</button>
+<button class="btn operator" onclick="appendOperator('-')">−</button>
+
+<button class="btn number" onclick="appendNumber('1')">1</button>
+<button class="btn number" onclick="appendNumber('2')">2</button>
+<button class="btn number" onclick="appendNumber('3')">3</button>
+<button class="btn operator" onclick="appendOperator('+')">+</button>
+
+<button class="btn number zero" onclick="appendNumber('0')">0</button>
+<button class="btn number" onclick="appendNumber('.')">.</button>
+<button class="btn equals" onclick="calculate()">=</button>
+</div>
+<p class="footer">MusaDev Calculator 🔥</p>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
